@@ -61,7 +61,6 @@
                        }
                    }
                    else {
-                       var alpha;
                        if (ui.value < 30) {
                            alpha = 3;
                        } else if (ui.value >= 30 && ui.value < 60) {
@@ -70,7 +69,8 @@
                        else {
                            alpha = 10;
                        }
-                       Haptics.vibrate(ui.value * alpha);
+                       var pause = Math.floor(ui.value/10)
+                       Haptics.pwm(pause * 10, 10 -  pause, pause);
                    }
                }
            });
