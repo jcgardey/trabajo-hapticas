@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Haptic Icons</title>
+    <title>Haptic Widgets</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/css/base/jquery.ui.all.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.2/css/lightness/jquery-ui-1.10.2.custom.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -20,7 +20,7 @@
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
 
-    <script src="stepper.widget.js"></script>
+    <script src="https://cdn.rawgit.com/juancruzgardey/trabajo-hapticas/master/stepper.widget.js"></script>
 
 </head>
 <style>
@@ -31,7 +31,7 @@
     }
 </style>
 <body>
-<h1 class="text-center">Haptic Icons</h1>
+<h1 class="text-center">Haptic Widgets</h1>
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
@@ -39,13 +39,42 @@
                 <input type="range" name="slider-fill" id="slider-fill" min="0" max="100" data-highlight="true">
             </div>
         </div>
-        <div class="row" style="margin-top: 20px">
+        <div class="row" style="margin-top: 30px">
             <div class="col-sm-10">
-                <label>Stepper Widget</label>
+                <label>Stepper</label>
                 <div class="stepper-widget">
                     <button type="button" class="js-qty-down btn btn-primary">-</button>
                     <input type="text" class="js-qty-input" value="1">
                     <button type="button" class="js-qty-up btn btn-primary">+</button>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top:30px">
+            <div class="col-sm-12">
+                <label>Collapsible</label>
+                <div data-role="collapsible" id="collapsible-button">
+                    <h3>Button</h3>
+                    <p>I'm the collapsible content. By default I'm closed, but you can click the header to open me.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:30px">
+            <div class="col-sm-10">
+                <div class="form-group" style="margin-bottom:10px">
+                    <label>Checkbox</label>
+                </div>
+                <div class="form-group">
+                    <label for="football">Football</label>
+                    <input type="checkbox" id="football">
+                    <label for="tennis">Tennis</label>
+                    <input type="checkbox" id="tennis">
+                    <label for="rugby">Rugby</label>
+                    <input type="checkbox" id="rugby">
+                    <label for="basket">Basket</label>
+                    <input type="checkbox" id="basket">
+                    <label for="golf">Golf</label>
+                    <input type="checkbox" id="golf">
                 </div>
             </div>
         </div>
@@ -84,20 +113,53 @@
                 Haptics.fadeOut(150);
             });
             $(".js-qty-up").on("vclick", function () {
-                //Haptics.fadeIn(200);
-
                 Haptics.clunk(150);
             });
+        }
+
+        function Collapsible() {
+            $("#collapsible-button").collapsible({
+                expand: function (event, ui) {
+                    Haptics.fadeIn(200);
+                },
+                collapse: function (event, ui) {
+                    Haptics.fadeOut(200);
+                }
+            });
+        }
+
+        function Checkboxes() {
+            $("input[type='checkbox']").checkboxradio();
+
+
+            $("input[type='checkbox']").change(function (event) {
+                if ($("input[type='checkbox']:checked").length == 0) {
+                    console.log("ninguno seleccionado");
+                    Haptics.vibrate([5,0,5,1,5,3,5,5,5,7,5,9,5,10,5,12,5,14,5,15,5,17,5,18,5,19,5,20,5,21,5,22,5,22,5,23,5,24,5,24,5,24,5,25,5,25,5,25,5]);
+                    return
+                }
+
+                if ($("input[type='checkbox']:checked").length == $("input[type='checkbox']").length) {
+                    Haptics.vibrate([5,12,5,12,5,12,5,11,5,11,5,11,5,10,5,10,5,10,5,9,5,9,5,9,5,8,5,8,5,7,5,7,5,7,5,6,5,6,5,6,5,5,5,5,5,5,5,5,5,4,5,4,5,4,5,4,5,3,5,3,5,3,5,3,5,2,5,2,5,2,5,2,5,2,5,1,5,1,5,1,5,1,5,0,5,0,5,0,5,1,5,2,5,4,5,8,5]);
+                    return
+                }
+
+                if ($(event.target).is(":checked")) {
+                    Haptics.vibrate([30,50,60]);
+                }
+                else {
+                    Haptics.vibrate([60,50,30])
+                }
+            });
+
         }
 
         $(document).ready(function () {
             Slider();
             Stepper();
-
+            Collapsible();
+            Checkboxes();
         });
-
-
-
     </script>
 
 </body>
