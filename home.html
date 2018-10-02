@@ -93,12 +93,12 @@
                     }
                     else {
                         if ($("#slider-fill").val() < 30) {
-                            alpha = 1;
+                            alpha = 1.5;
                         } else if ($("#slider-fill").val() >= 30 && $("#slider-fill").val() < 60) {
-                            alpha = 2;
+                            alpha = 3;
                         }
                         else {
-                            alpha = 4;
+                            alpha = 6;
                         }
                         Haptics.vibrate(alpha * $("#slider-fill").val());
                     }
@@ -109,11 +109,9 @@
         function Stepper() {
             $('.stepper-widget').stepper();
             $(".js-qty-down").on("vclick", function () {
-                //Haptics.fadeOut(150);
                 Haptics.vibrate([60,250,30])
             });
             $(".js-qty-up").on("vclick", function () {
-                //Haptics.clunk(150);
                 Haptics.vibrate([30,250,60]);
             });
         }
@@ -135,13 +133,12 @@
 
             $("input[type='checkbox']").change(function (event) {
                 if ($("input[type='checkbox']:checked").length == 0) {
-                    console.log("ninguno seleccionado");
                     Haptics.vibrate([5,0,5,1,5,3,5,5,5,7,5,9,5,10,5,12,5,14,5,15,5,17,5,18,5,19,5,20,5,21,5,22,5,22,5,23,5,24,5,24,5,24,5,25,5,25,5,25,5]);
                     return
                 }
 
                 if ($("input[type='checkbox']:checked").length == $("input[type='checkbox']").length) {
-                    Haptics.vibrate([5,12,5,12,5,12,5,11,5,11,5,11,5,10,5,10,5,10,5,9,5,9,5,9,5,8,5,8,5,7,5,7,5,7,5,6,5,6,5,6,5,5,5,5,5,5,5,5,5,4,5,4,5,4,5,4,5,3,5,3,5,3,5,3,5,2,5,2,5,2,5,2,5,2,5,1,5,1,5,1,5,1,5,0,5,0,5,0,5,1,5,2,5,4,5,8,5]);
+                    Haptics.vibrate([5,24,5,23,5,23,5,22,5,22,5,21,5,20,5,19,5,19,5,18,5,17,5,16,5,15,5,14,5,13,5,12,5,11,5,10,5,9,5,7,5,6,5,5,5,4,5,3,5,2,5,1,5,1,5,1,5,1,5]);
                     return
                 }
 
@@ -159,11 +156,11 @@
             $("#formatted_input").mask('00/00/0000', {
 
                 onInvalid: function (val, e, f, invalid, options) {
-                    Haptics.vibrate([20,40,20,40,20]);
+                    Haptics.vibrate([40,80,40,80,40]);
                 },
 
                 onChange: function () {
-                    Haptics.vibrate(50);
+                    Haptics.vibrate(30);
                 }
             });
         }
